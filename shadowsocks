@@ -1,0 +1,15 @@
+FROM ubuntu:16.04
+
+RUN apt-get update
+RUN apt-get install shadowsocks -y
+
+ENV port 8838
+ENV server 0.0.0.0
+ENV password password
+ENV method aes-256-cfb
+ENV workers 2
+
+CMD ssserver -s ${server} -p ${port} -k ${password} -m ${method} --fast-open --workers ${workers} -q
+
+EXPOSE ${port}/tcp
+EXPOSE ${port}/udp
